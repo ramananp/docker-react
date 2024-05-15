@@ -5,3 +5,14 @@ before_install:
   - docker build -t ramananp/docker-react -f Dockerfile.dev .
 script:
   - docker run -e CI=true ramananp/docker-react npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: fronend
+  env: "Fronend-env"
+  bucket_name: "elasticbeanstalk-us-east-2-947312186348"
+  bucket_path: "fronend"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
